@@ -17,7 +17,7 @@ Three interfaces must be implemented from workload_gen.py:
 
 | Methode         | Description |
 | --------------- | ----------- |
-| result(context) | Is called from scotty until result gices an result != nil <br> Check the state of your workload here and return false if the workload has no results yet otherwise return true (You must save the results yourself) |
+| result(context) | Is called from scotty until result == true <br> Check the state of your workload here and return false if the workload has no results yet otherwise return true (You must save the results yourself) |
 | run(context)    | Is called from scotty if the workload is started. Please implement this methode as a non blocking methode and collect state and results in the result methode |
 | clean(context)  | Is called from scotty if the workload is finished. Clean all workload related stuff here |
 
