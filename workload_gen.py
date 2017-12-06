@@ -15,6 +15,7 @@ def run(context):
     mongo_password = workload.params['mongo_password']
     mongo_host = workload.params['mongo_host']
     mongo_port = workload.params['mongo_port']
+    mongo_port = int(float(mongo_port))
     mongo_client = pymongo.MongoClient(mongo_host,
                                        mongo_port,
                                        username=mongo_user,
