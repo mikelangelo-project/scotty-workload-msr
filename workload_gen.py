@@ -25,6 +25,8 @@ def run(context):
     logger.info(database)
     collection = database.code_entity_state
     logger.info(collection)
+    collection_count = collection.count()
+    logger.info(collection_count)
     logger.info('I\'m workload generator {}'.format(workload.name))
     return None
 
