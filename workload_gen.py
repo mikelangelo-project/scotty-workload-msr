@@ -11,7 +11,9 @@ def run(context):
     workload = context.v1.workload
     utils.ExperimentHelper(context)
     logger.info('{}'.format(workload.params['greeting']))
-    logger.info('mongo_user', workload.params['mongo_user'])
+    mongo_user = workload.params['mongo_user']
+    print mongo_user
+    logger.info('mongo_user')
     pymongo.MongoClient()
     logger.info('I\'m workload generator {}'.format(workload.name))
     return None
