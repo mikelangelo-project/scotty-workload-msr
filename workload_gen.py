@@ -17,10 +17,9 @@ def run(context):
     mongo_port = workload.params['mongo_port']
     mongo_port = int(float(mongo_port))
     mongo_endpoint = workload.params['mongo_endpoint']
+    logger.info(mongo_endpoint)
     mongo_client = pymongo.MongoClient(mongo_endpoint)
-    logger.info(mongo_client)
     database = mongo_client.smartshark_test
-    logger.info(database)
     collection = database.code_entity_state
     logger.info(collection)
     collection_count = collection.count()
