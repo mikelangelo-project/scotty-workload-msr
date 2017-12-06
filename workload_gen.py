@@ -13,8 +13,12 @@ def run(context):
     logger.info('{}'.format(workload.params['greeting']))
     mongo_user = workload.params['mongo_user']
     mongo_password = workload.params['mongo_password']
-    mongo_endpoint = workload.params['mongo_endpoint']
-    mongo_client = pymongo.MongoClient(mongo_endpoint, mongo_user, mongo_password)
+    mongo_host = workload.params['mongo_host']
+    mongo_port = workload.params['mongo_port']
+    mongo_client = pymongo.MongoClient(mongo_host,
+                                       mongo_port,
+                                       username=mongo_user,
+                                       password=mongo_password)
     logger.info(mongo_client)
     logger.info('I\'m workload generator {}'.format(workload.name))
     return None
