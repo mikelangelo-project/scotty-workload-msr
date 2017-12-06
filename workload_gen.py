@@ -23,6 +23,8 @@ def run(context):
     logger.info(mongo_client)
     database = mongo_client.smartshark_test
     logger.info(database)
+    collection = database.code_entity_state
+    logger.info(collection)
     logger.info('I\'m workload generator {}'.format(workload.name))
     return None
 
