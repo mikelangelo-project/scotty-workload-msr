@@ -16,10 +16,8 @@ def run(context):
     mongo_host = workload.params['mongo_host']
     mongo_port = workload.params['mongo_port']
     mongo_port = int(float(mongo_port))
-    mongo_client = pymongo.MongoClient(mongo_host,
-                                       mongo_port,
-                                       username=mongo_user,
-                                       password=mongo_password)
+    mongo_endpoint = workload.params['mongo_endpoint']
+    mongo_client = pymongo.MongoClient(mongo_endpoint)
     logger.info(mongo_client)
     database = mongo_client.smartshark_test
     logger.info(database)
