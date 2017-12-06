@@ -10,7 +10,6 @@ logger = logging.getLogger(__name__)
 def run(context):
     workload = context.v1.workload
     utils.ExperimentHelper(context)
-    logger.info('{}'.format(workload.params['greeting']))
     mongo_user = workload.params['mongo_user']
     mongo_password = workload.params['mongo_password']
     mongo_host = workload.params['mongo_host']
@@ -27,8 +26,7 @@ def run(context):
     collection = database.code_entity_state
     logger.info(collection)
     collection_count = collection.count()
-    logger.info(collection_count)
-    logger.info('I\'m workload generator {}'.format(workload.name))
+    logger.info('I\'ve found {} documents'.format(collection_count))
     return None
 
 
