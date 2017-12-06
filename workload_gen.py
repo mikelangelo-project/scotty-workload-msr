@@ -14,7 +14,8 @@ def run(context):
     mongo_user = workload.params['mongo_user']
     mongo_password = workload.params['mongo_password']
     mongo_endpoint = workload.params['mongo_endpoint']
-    pymongo.MongoClient(mongo_endpoint)
+    mongo_client = pymongo.MongoClient(mongo_endpoint, mongo_user, mongo_password)
+    logger.info(mongo_client)
     logger.info('I\'m workload generator {}'.format(workload.name))
     return None
 
