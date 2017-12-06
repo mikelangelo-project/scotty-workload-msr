@@ -21,6 +21,8 @@ def run(context):
                                        username=mongo_user,
                                        password=mongo_password)
     logger.info(mongo_client)
+    database_names = mongo_client.database_names()
+    logger.info(database_names)
     logger.info('I\'m workload generator {}'.format(workload.name))
     return None
 
