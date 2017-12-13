@@ -49,20 +49,20 @@ def run(context):
     duration = end_time_query - start_time_query
     logger.info('The MSR workload took {}s'.format(duration))
     end_time_workload = time.time()
-    _store_result(start_time_workload, end_time_workload, duration)
+    _store_result(start_time_workload, end_time_workload, sample_size, duration)
     return {'duration': duration}
 
 
-def _store_result(start_time, end_time, duration):
+def _store_result(start_time, end_time, sample_size, duration):
     results_filename = 'results.csv'
     init_file = False
     if not os.path.exists(results_filename):
         init_file = True
     with open(results_filename, 'a') as results_file:
         if init_file:
-            header_line = 'start, end, duration\n'
+            header_line = 'start, end, sample_size, duration\n'
             results_file.write(header_line)
-        csv_line = '{}, {}, {}\n'.format(start_time, end_time, duration)
+        csv_line = '{}, {}, {}, {}\n'.format(start_time, end_time, duration)
         results_file.write(csv_line)
 
 
