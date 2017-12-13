@@ -62,7 +62,7 @@ def _store_result(start_time, end_time, sample_size, duration):
         if init_file:
             header_line = 'start, end, sample_size, duration\n'
             results_file.write(header_line)
-        csv_line = '{}, {}, {}, {}\n'.format(start_time, end_time, duration)
+        csv_line = '{}, {}, {}, {}\n'.format(start_time, end_time, sample_size, duration)
         results_file.write(csv_line)
 
 
