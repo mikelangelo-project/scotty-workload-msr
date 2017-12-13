@@ -1,5 +1,6 @@
 import logging
 import time
+import os.path
 
 import pymongo
 from scotty import utils
@@ -8,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def run(context):
+    start_time_workload = time.time()
     workload = context.v1.workload
     utils.ExperimentHelper(context)
     mongo_user = workload.params['mongo_user']
@@ -26,8 +28,8 @@ def run(context):
     database = mongo_client.smartshark_test
     collection = database.code_entity_state
     document_count = collection.count()
-    collection_size_messge = 'Collection count:'.format(document_count)
-    logger.info(collection_size_messge)
+    collection_size_message = 'Collection.count() --> {}'.format(document_count)
+    logger.info(collection_size_message)
     pipeline = [{
         '$sample': {
             'size': sample_size
@@ -40,12 +42,28 @@ def run(context):
             }
         }
     }]
-    start_time = time.time()
+    logger.info('Beginning with the workload')
+    start_time_query = time.time()
     collection.aggregate(pipeline)
-    end_time = time.time()
-    duration = end_time - start_time
+    end_time_query = time.time()
+    duration = end_time_query - start_time_query
     logger.info('The MSR workload took {}s'.format(duration))
+    end_time_workload = time.time()
+    _store_result(start_time_workload, end_time_workload, duration)
     return {'duration': duration}
+
+
+def _store_result(start_time, end_time, duration):
+    results_filename = 'results.csv'
+    init_file = False
+    if not os.path.exists(results_filename):
+        init_file = True
+    with open(results_filename, 'a') as results_file:
+        if init_file:
+            header_line = 'start, end, duration\n'
+            results_file.write(header_line)
+        csv_line = '{}, {}, {}\n'.format(start_time, end_time, duration)
+        results_file.write(csv_line)
 
 
 def clean(context):
