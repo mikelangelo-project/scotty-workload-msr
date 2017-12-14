@@ -43,7 +43,7 @@ def run(context):
             }
         }
     }]
-    logger.info('Beginning with the workload')
+    logger.info('Beginning with the workload with a sample size of {}'.format(sample_size))
     start_time_query = time.time()
     collection.aggregate(pipeline)
     end_time_query = time.time()
