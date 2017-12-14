@@ -17,6 +17,7 @@ def run(context):
     mongo_host = workload.params['mongo_host']
     mongo_port = workload.params['mongo_port']
     sample_size = workload.params['sample_size']
+    sample_size = int(float(sample_size))
     mongo_port = int(float(mongo_port))
     database_name = 'smartshark_test'
     mongo_client = pymongo.MongoClient(
